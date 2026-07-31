@@ -5,8 +5,11 @@ on:
   workflow_dispatch:
   push:
     paths:
-        - './kubejs/**'
+      - "./kubejs/**"
 
+permissions:
+  checks: write
+  contents: write
 jobs:
   run-linters:
     if: github.ref_name != 'main'
@@ -15,9 +18,8 @@ jobs:
     permissions:
       contents: write
     defaults:
-        run:
-          working-directory: ./kubejs
-          
+      run:
+        working-directory: ./kubejs
 
     steps:
       - name: Check out Git repository
