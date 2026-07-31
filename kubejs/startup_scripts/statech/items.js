@@ -326,44 +326,65 @@ StartupEvents.registry('item', (event) => {
 });
 
 ItemEvents.modification((event) => {
+    /**
+     * Description
+     * @param {string} armorID The fully namespaced ID of the armor you wish to modify
+     * @param {number} newDurability The new durability to apply to that armor
+     * @param {number} newArmorValue The new armor value to apply to that armor
+     */
+    const modifyArmor = (armorID, newDurability, newArmorValue) => {
+        const piece = armorID.slice(armorID.lastIndexOf('_') + 1);
+        const piece_to_slot = {
+            helmet: 'head',
+            chestplate: 'chest',
+            leggings: 'legs',
+            boots: 'feet',
+        };
+
+        event.modify(armorID, (item) => {
+            item.maxDamage = newDurability;
+
+            item.addAttributeModifier(
+                'minecraft:generic.armor',
+                {
+                    id: `statech:armor_modifier`,
+                    amount: newArmorValue,
+                    operation: 'add_value',
+                },
+                piece_to_slot[piece]
+            );
+        });
+    };
+
+    modifyArmor('minecraft:iron_helmet', 148, 2);
+    modifyArmor('minecraft:iron_chestplate', 216, 4);
+    modifyArmor('minecraft:iron_leggings', 202, 4);
+    modifyArmor('minecraft:iron_boots', 175, 2);
+
     event.modify('kubejs:charcoal_block', (item) => {
         item.burnTime = 14400;
     });
 
-    event.modify('minecraft:iron_helmet', item => {
-        item.maxDamage = 148
-        // item.armorProtection = 2
-    });
-
-    event.modify('minecraft:iron_chestplate', item => {
-        item.maxDamage = 216
-        // item.armorProtection = 4
-    });
-
-    event.modify('minecraft:iron_leggings', item => {
-        item.maxDamage = 202
-        // item.armorProtection = 4
-    });
-
-    event.modify('minecraft:iron_boots', item => {
-        item.maxDamage = 175
-        // item.armorProtection = 2
-    });
-
-    const toolSet = [
-        'pickaxe',
-        'axe',
-        'hoe',
-        'sword',
-        'shovel'        
-    ];
+    const toolSet = ['pickaxe', 'axe', 'hoe', 'shovel'];
 
     toolSet.forEach((tool) => {
-        event.modify(`iron_${tool}`, item => {
+        event.modify(`minecraft:iron_${tool}`, (item) => {
             item.maxDamage = 225;
-            // item.digSpeed = 5;
-            item.attackDamage = 1.5
-        })
-    })
-
+            item.tool = {
+                defaultMiningSpeed: 1,
+                rules: [
+                    {
+                        blocks: '#minecraft:incorrect_for_iron_tool',
+                        correctForDrops: false,
+                    },
+                    {
+                        blocks: `#minecraft:mineable/${tool}`,
+                        correctForDrops: true,
+                        speed: 5,
+                    },
+                ],
+            };
+            item.attackDamage = 1.5;
+        });
+    });
 });
