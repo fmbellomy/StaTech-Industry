@@ -1,13 +1,10 @@
 name: Build Project
 run-name: "Project Build #${{ github.run_number }}"
 on:
-  workflow_dispatch:
-  pull_request:
+  push:
     branches:
+      - dev
       - main
-      - 2.0.1
-    types:
-      - closed
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
