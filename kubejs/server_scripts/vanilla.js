@@ -5,8 +5,8 @@
 
 ServerEvents.recipes((event) => {
     // -- MOD NAMESPACE UTILITY FUNCTIONS -- //
-    let st = (id) => `statech:minecraft/${id}`;
-
+    let recipeId = StaTech.recipeId;
+    let mc = MC.id;
     // -- REMOVED RECIPES -- //
     const VANILLA_DELETED = [
         mc('diamond_helmet'),
@@ -49,7 +49,7 @@ ServerEvents.recipes((event) => {
             G: '#c:storage_blocks/gold',
             S: mc('nether_star'),
         })
-        .id(st('totem_of_undying'));
+        .id(recipeId('totem_of_undying'));
 
     // -- BUNDLE -- //
     event
@@ -57,7 +57,7 @@ ServerEvents.recipes((event) => {
             S: '#c:strings',
             L: '#c:leathers',
         })
-        .id(st('bundle'));
+        .id(recipeId('bundle'));
 
     // -- PISTON -- //
     event
@@ -67,33 +67,33 @@ ServerEvents.recipes((event) => {
             I: '#c:rods/iron',
             R: '#c:dusts/redstone',
         })
-        .id(st('piston'));
+        .id(recipeId('piston'));
 
     // -- IRON BARS -- //
     event
         .shaped('16x ' + mc('iron_bars'), ['RRR', 'RRR'], {
             R: '#c:rods/iron',
         })
-        .id(st('iron_bars'));
+        .id(recipeId('iron_bars'));
 
     // -- BUCKET -- //
     event
         .shaped(mc('bucket'), ['P P', ' P '], {
             P: '#c:plates/iron',
         })
-        .id(st('bucket'));
+        .id(recipeId('bucket'));
 
     event
         .shaped('16x ' + mc('stick'), ['L', 'L'], {
             L: '#minecraft:logs',
         })
-        .id(st('sticks_from_log'));
+        .id(recipeId('sticks_from_log'));
 
     // -- BUCKET ALT METALS -- //
     ALT_METALS.forEach((id) => {
         event
             .shaped(mc('bucket'), ['P P', ' P '], { P: `#c:plates/${id}` })
-            .id(st(`bucket_${id}`));
+            .id(recipeId(`bucket_${id}`));
     });
 
     // -- HOPPER ALT METALS -- //
@@ -103,7 +103,7 @@ ServerEvents.recipes((event) => {
                 I: `#c:ingots/${id}`,
                 C: '#c:chests/wooden',
             })
-            .id(st(`hopper_${id}`));
+            .id(recipeId(`hopper_${id}`));
     });
 
     // -- DETECTOR RAIL ALT METALS -- //
@@ -114,7 +114,7 @@ ServerEvents.recipes((event) => {
                 P: mc('stone_pressure_plate'),
                 R: '#c:dusts/redstone',
             })
-            .id(st(`detector_rail_${id}`));
+            .id(recipeId(`detector_rail_${id}`));
     });
 
     // -- ACTIVATOR RAIL ALT METALS -- //
@@ -125,7 +125,7 @@ ServerEvents.recipes((event) => {
                 S: '#c:rods/wooden',
                 R: mc('redstone_torch'),
             })
-            .id(st(`activator_rail_${id}`));
+            .id(recipeId(`activator_rail_${id}`));
     });
 
     // -- RAIL ALT METALS -- //
@@ -135,7 +135,7 @@ ServerEvents.recipes((event) => {
                 I: `#c:ingots/${id}`,
                 S: '#c:rods/wooden',
             })
-            .id(st(`rail_${id}`));
+            .id(recipeId(`rail_${id}`));
     });
 
     // -- CAULDRON ALT METALS -- //
@@ -144,7 +144,7 @@ ServerEvents.recipes((event) => {
             .shaped(mc('cauldron'), ['I I', 'I I', 'III'], {
                 I: `#c:ingots/${id}`,
             })
-            .id(st(`cauldron_${id}`));
+            .id(recipeId(`cauldron_${id}`));
     });
 
     // -- ANVIL ALT METALS -- //
@@ -154,14 +154,14 @@ ServerEvents.recipes((event) => {
                 B: `#c:storage_blocks/${id}`,
                 I: `#c:ingots/${id}`,
             })
-            .id(st(`anvil_${id}`));
+            .id(recipeId(`anvil_${id}`));
     });
 
     // -- MINECART ALT METALS -- //
     ALT_METALS.forEach((id) => {
         event
             .shaped(mc('minecart'), ['I I', 'III'], { I: `#c:ingots/${id}` })
-            .id(st(`minecart_${id}`));
+            .id(recipeId(`minecart_${id}`));
     });
 
     // -- CLOCK -- //
@@ -170,7 +170,7 @@ ServerEvents.recipes((event) => {
             R: mc('redstone'),
             G: mi('gold_ring'),
         })
-        .id(st('clock'));
+        .id(recipeId('clock'));
 
     // -- COMPASS -- //
     event
@@ -178,39 +178,39 @@ ServerEvents.recipes((event) => {
             R: mc('redstone'),
             O: mi('iron_ring'),
         })
-        .id(st('compass'));
+        .id(recipeId('compass'));
 
     // -- CHAINS -- //
     event
         .shaped('8x ' + mc('chain'), ['O', 'O', 'O'], {
             O: mi('iron_ring'),
         })
-        .id(st('chain'));
+        .id(recipeId('chain'));
 
     // -- IRON ARMOR -- //
     event
         .shaped(mc('iron_helmet'), ['III', 'I I'], {
             I: mi('iron_plate'),
         })
-        .id(st('iron_helmet'));
+        .id(recipeId('iron_helmet'));
 
     event
         .shaped(mc('iron_chestplate'), ['I I', 'III', 'III'], {
             I: mi('iron_plate'),
         })
-        .id(st('iron_chestplate'));
+        .id(recipeId('iron_chestplate'));
 
     event
         .shaped(mc('iron_leggings'), ['III', 'I I', 'I I'], {
             I: mi('iron_plate'),
         })
-        .id(st('iron_leggings'));
+        .id(recipeId('iron_leggings'));
 
     event
         .shaped(mc('iron_boots'), ['I I', 'I I'], {
             I: mi('iron_plate'),
         })
-        .id(st('iron_boots'));
+        .id(recipeId('iron_boots'));
 
     // ---------------------------//
     // --- SHAPELESS CRAFTING --- //
@@ -243,7 +243,9 @@ ServerEvents.recipes((event) => {
                 [recipe, mi('wax')]
             )
             .id(
-                st(`waxed_${recipe.split(':')[1]}_from_${recipe.split(':')[1]}`)
+                recipeId(
+                    `waxed_${recipe.split(':')[1]}_from_${recipe.split(':')[1]}`
+                )
             );
 
         // -- EXPOSED -- //
@@ -259,7 +261,7 @@ ServerEvents.recipes((event) => {
                 ]
             )
             .id(
-                st(
+                recipeId(
                     `waxed_exposed_${recipe.split(':')[1]}_from_exposed_${recipe.split(':')[1]}`
                 )
             );
@@ -277,7 +279,7 @@ ServerEvents.recipes((event) => {
                 ]
             )
             .id(
-                st(
+                recipeId(
                     `waxed_weathered_${recipe.split(':')[1]}_from_weathered_${recipe.split(':')[1]}`
                 )
             );
@@ -295,7 +297,7 @@ ServerEvents.recipes((event) => {
                 ]
             )
             .id(
-                st(
+                recipeId(
                     `waxed_oxidized_${recipe.split(':')[1]}_from_oxidized_${recipe.split(':')[1]}`
                 )
             );
@@ -331,8 +333,7 @@ ServerEvents.recipes((event) => {
 
 ServerEvents.tags('item', (event) => {
     // -- MOD NAMESPACE UTILITY FUNCTIONS -- //
-    let mc = (id) => `minecraft:${id}`;
-
+    let mc = MC.id;
     const HORSE_ARMORS = [
         mc('leather_horse_armor'),
         mc('iron_horse_armor'),
