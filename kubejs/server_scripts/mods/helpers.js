@@ -1,0 +1,74 @@
+// Mod Namespace and Recipe ID helper functions
+const makeHelper = (id) => {
+    return {
+        id: (path) => `${id}:${path}`,
+        recipeId: (path) => `statech:${id}/path`,
+    };
+};
+const StaTech = makeHelper('statech');
+const MI = makeHelper('modern_industrialization');
+const EI = makeHelper('extended_industrialization');
+const YAI = makeHelper('yet_another_industrialization');
+const MC = makeHelper('minecraft');
+const AE2 = makeHelper('ae2');
+const SpaceAge = makeHelper('space_age');
+const KubeJS = makeHelper('kubejs');
+const MoreRed = makeHelper('morered');
+const Cognition = makeHelper('cognition');
+const MITweaks = makeHelper('mi_tweaks');
+const ModernDynamics = makeHelper('moderndynamics');
+const IndOverdrive = makeHelper('industrialization_overdrive');
+const Create = makeHelper('create');
+const Spectrum = makeHelper('spectrum');
+const WSTweaks = makeHelper('wstweaks');
+const ExtendedAE = makeHelper('extendedae');
+const BankStorage = makeHelper('bankstorage');
+const BuildingGadgets = makeHelper('buildinggadgets2');
+const SpectralDeco = makeHelper('spectral_decorations');
+const FuncStorage = makeHelper('functionalstorage');
+const SophBackpacks = makeHelper('sophisticatedbackpacks');
+const SophStorage = makeHelper('sophisticatedstorage');
+const Waystones = makeHelper('waystones');
+const MoreFuncStorage = makeHelper('morefunctionalstorage');
+const GadgetsAgainstGrind = makeHelper('gag');
+const Artifacts = makeHelper('artifacts');
+const WirelessTerm = makeHelper('ae2wtlib');
+const SimpleMagnets = makeHelper('simplemagnets');
+const Supplementaries = makeHelper('supplementaries');
+const MegaCells = makeHelper('megacells');
+const EnderStorage = makeHelper('enderstorage');
+const HangGlider = makeHelper('hangglider');
+const JustHammers = makeHelper('justhammers');
+const TravelAnchors = makeHelper('travelanchors');
+const ExplorersCompass = makeHelper('explorerscompass');
+const NoMansLand = makeHelper('nomansland');
+const UsefulSlime = makeHelper('usefulslime');
+const TorchMaster = makeHelper('torchmaster');
+const BiggerAE2 = makeHelper('bigger_ae2');
+const CulturalDelights = makeHelper('culturaldelights');
+const XTones = makeHelper('xtonesreworked');
+const ArchitectsPalette = makeHelper('architects_palette');
+const FramedBlocks = makeHelper('framedblocks');
+const DecoBlocks = makeHelper('decorative_blocks');
+const Luminax = makeHelper('luminax');
+const IndustriallyPlated = makeHelper('industrially_plated');
+const IdenDecor = makeHelper('iden_decor');
+const SimplyLight = makeHelper('simplylight');
+const PipeConnector = makeHelper('pipe_connector');
+const CreateAdditions = makeHelper('createaddition');
+const CreateDeco = makeHelper('createdeco');
+const Companion = makeHelper('stcm');
+const Chisel = makeHelper('chisel');
+const LittleBigRedstone = makeHelper('little_big_redstone');
+const ComputerCraft = makeHelper('computercraft');
+const BrewinAndChewin = makeHelper('brewinandchewin');
+const AdvancedPeripherals = makeHelper('advancedperipherals');
+const TacZ = makeHelper('tacz');
+const Scannable = makeHelper('scannable');
+const ConstructionStick = makeHelper('constructionstick');
+const RusticDelight = makeHelper('rusticdelight');
+const DelightfulCreators = makeHelper('delightfulcreators');
+const CulturalCreators = makeHelper('culturalcreators');
+const Toolbelt = makeHelper('toolbelt');
+
+// Recipe helper functions
