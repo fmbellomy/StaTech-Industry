@@ -1,39 +1,28 @@
 MoreJS.structureLoad((event) => {
+    const kjs = KubeJS.id;
+    const mc = MC.id;
+    const replacementMap = {};
+    ['waxed_oxidized_copper', 'waxed_copper_block', 'oxidized_copper'].forEach(
+        (path) => {
+            replacementMap[mc(path)] = kjs(`decorative_{path}`);
+        }
+    );
+
     if (event.id.includes('trial_chambers')) {
         event.forEachPalettes((palette) => {
             palette.forEach((blockInfo) => {
-                if (blockInfo.id == 'minecraft:jigsaw' && blockInfo.getNbt() != null) {
-                    if (
-                        blockInfo.getNbt().getString('final_state') ==
-                        'minecraft:waxed_oxidized_copper'
-                    )
+                if (
+                    blockInfo.id == mc('jigsaw') &&
+                    blockInfo.getNbt() != null
+                ) {
+                    let block = blockInfo.getNbt().getString('final_state');
+                    if (replacementMap[block])
                         blockInfo
                             .getNbt()
-                            .putString(
-                                'final_state',
-                                'kubejs:decorative_waxed_oxidized_copper'
-                            );
+                            .putString('final_state', replacementMap[block]);
                 }
-                if (blockInfo.id == 'minecraft:jigsaw' && blockInfo.getNbt() != null) {
-                    if (
-                        blockInfo.getNbt().getString('final_state') ==
-                        'minecraft:waxed_copper_block'
-                    )
-                        blockInfo
-                            .getNbt()
-                            .putString(
-                                'final_state',
-                                'kubejs:decorative_waxed_copper_block'
-                            );
-                }
-                if (blockInfo.id == 'minecraft:waxed_copper_block') {
-                    blockInfo.setBlock('kubejs:decorative_waxed_copper_block');
-                } else if (blockInfo.id == 'minecraft:waxed_oxidized_copper') {
-                    blockInfo.setBlock(
-                        'kubejs:decorative_waxed_oxidized_copper'
-                    );
-                } else if (blockInfo.id == 'minecraft:copper_block') {
-                    blockInfo.setBlock('kubejs:decorative_waxed_copper_block');
+                if (replacementMap[blockInfo.id]) {
+                    blockInfo.setBlock(replacementMap[blockInfo.id]);
                 }
             });
         });
